@@ -21,5 +21,22 @@
 {{blog.body}}</pre
 >
 <br />
+<div>{% for hashtag in hashtags.all %} #{{hashtag}} {% endfor %}</div>
+<br />
+<a href="{% url 'home' %}">목록</a>
 <a href="{% url 'edit' blog.id %}">수정하기</a>
 <a href="{% url 'delete' blog.id %}">삭제하기</a>
+
+<br />
+<br />
+<hr />
+<a class="add_comment" href="{% url 'add_comment' blog.id %}">댓글 달기</a>
+{% for comment in blog.comments.all %}
+<div class="comment">
+  <strong class="username">{{ comment.username }}</strong>
+  <div class="date">{{ comment.created_at }}</div>
+  <p>{{ comment.comment_text|linebreaks }}</p>
+</div>
+{% empty %}
+<p>아직 댓글이 없습니다</p>
+{% endfor %}
