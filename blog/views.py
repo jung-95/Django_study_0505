@@ -73,6 +73,7 @@ def update(request, blog_id):
     updated_hashtag.hashtag = tag
     updated_hashtag.save()
     blog_updated.hashtag.add(updated_hashtag)
+    blog_updated.save()
   return redirect('detail', blog_updated.id)
 
 
