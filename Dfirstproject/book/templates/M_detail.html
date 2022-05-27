@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+    <head>
+        <link rel = "stylesheet" href="{% static 'detail.css' %}">
+        <a style="font-size: 30px;">추리</a>
+    </head>
+    <body>
+        <div>
+            <h1>{{  M_post.title  }}</h1>
+            <span>{{ M_post.author }}</span>
+            <span>{{ M_post.upload_time }}</span>
+            <div class="content">{{ M_post.content }}</div>
+            <br>
+            <a href="{% url 'M_edit' M_post.id %}">▶수정하기</a>
+            <br>
+            <a href="{% url 'M_delete' M_post.id %}">▶삭제하기</a>
+            <br>
+            <a href="{% url 'list' %}">▶홈으로 돌아가기</a>
+        </div>
+    </body>
+</html>

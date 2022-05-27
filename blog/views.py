@@ -1,5 +1,6 @@
+from xml.etree.ElementTree import Comment
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Blog, HashTag
+from .models import Blog, HashTag, Comment
 from django.utils import timezone
 from .forms import BlogForm, CommentForm
 
@@ -19,6 +20,14 @@ def add_comment(request, blog_id):
     form = CommentForm()
 
   return render(request, 'add_comment.html', {'form':form})
+
+
+def del_comment(request, com_id, blog_id):
+  com_blog = Comment.objects.get(id=com_id)
+  com_blog.delete()
+
+  return redirect('detail', blog_id)
+
 
 # Create your views here.
 
@@ -59,21 +68,23 @@ def delete(request, blog_id):
 
 def edit(request, blog_id):
   post = get_object_or_404(Blog, pk=blog_id)
-  hash = get_object_or_404(HashTag, pk=blog_id)
+  hash = post.hashtag.all()
   return render(request, 'edit.html', {'blog':post, 'hashtags':hash})
 
 def update(request, blog_id):
+  request.method == 'POST'
   blog_updated = get_object_or_404(Blog, pk=blog_id)
   blog_updated.title = request.POST['title']
   blog_updated.body = request.POST['body']
+  blog_updated.save()
   hashtags = request.POST['hashtags']
   hashtag = hashtags.split(", ")
+  blog_updated.hashtag.clear()
   for tag in hashtag:
     updated_hashtag = HashTag()
     updated_hashtag.hashtag = tag
-    updated_hashtag.save()
+    updated_hashtag.save() 
     blog_updated.hashtag.add(updated_hashtag)
-    blog_updated.save()
   return redirect('detail', blog_updated.id)
 
 

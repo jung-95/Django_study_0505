@@ -1,0 +1,21 @@
+{% load static %}
+<html>
+    <head>
+        <link rel = "stylesheet" href="{% static 'detail.css' %}">
+        <a style="font-size: 30px;">로맨스</a>
+    </head>
+    <body>
+        <div>
+            <h1>{{  R_post2.title  }}</h1>
+            <span>{{ R_post2.author }}</span>
+            <span>{{ R_post2.upload_time }}</span>
+            <div class="content">{{ R_post2.content }}</div>
+            <br>
+            <a href="{% url 'R_edit2' R_post2.id %}">▶수정하기</a>
+            <br>
+            <a href="{% url 'R_delete2' R_post2.id %}">▶삭제하기</a>
+            <br>
+            <a href="{% url 'list2' %}">▶홈으로 돌아가기</a>
+        </div>
+    </body>
+</html>

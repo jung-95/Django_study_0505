@@ -23,7 +23,11 @@
       <p>제목:<input type="text" name="title" value="{{blog.title}}" /></p>
       본문:
       <textarea name="body" col="50" row="30" id="">{{blog.body}}</textarea>
-      <input type="text" name="hashtags" placeholder="해시태그 , 로 구분" />
+      <input
+        type="text"
+        name="hashtags"
+        value="{% for hashtag in hashtags.all %}{{hashtag}},{% endfor %}"
+      />
       <button type="submit">제출</button>
     </form>
   </body>
