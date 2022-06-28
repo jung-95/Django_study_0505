@@ -1,14 +1,12 @@
-<style>
-  @font-face {
-    font-family: 'SuncheonB';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-      format('woff');
-    font-weight: normal;
-    font-style: normal;
-  }
-</style>
+{% extends 'base.html' %} {% block head %}
+<title>Detail</title>
+{% endblock %} {% block content %}
 <h3>{{blog.title}}</h3>
 {{blog.date}}
+<br />
+{% if blog.photo %}
+<img src="{{ blog.photo.url }}" alt="" height="200px;" />
+{% endif %}
 <br />
 <pre
   style="
@@ -42,4 +40,4 @@
 </div>
 {% empty %}
 <p>아직 댓글이 없습니다</p>
-{% endfor %}
+{% endfor %} {% endblock %}

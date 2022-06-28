@@ -1,29 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>new</title>
-  </head>
-  <body>
-    <style>
-      @font-face {
-        font-family: 'SuncheonB';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-          format('woff');
-        font-weight: normal;
-        font-style: normal;
-      }
-    </style>
-    <h1>Creating Character</h1>
+{% extends 'base.html' %} {% block head %}
+<title>new</title>
+{% endblock %} {% block content %}
+<h1>Creating Character</h1>
 
-    <form action="{% url 'create' %}" method="post">
-      {% csrf_token %}
-      <p>이름: <input type="text" name="title" /></p>
-      본문 : <textarea name="body" cols="50" rows="30"></textarea> 해시태그
-      <input type="text" name="hashtags" placeholder="해시태그 , 로 구분" />
-      <button type="submit">제출</button>
-    </form>
-  </body>
-</html>
+<form action="{% url 'create' %}" method="post" enctype="multipart/form-data">
+  {% csrf_token %} {{ form.as_p }} 해시태그<input
+    type="text"
+    name="hashtags"
+    placeholder="해시태그 , 로 구분"
+  />
+  <button type="submit">제출</button>
+</form>
+{% endblock %}

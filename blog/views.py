@@ -41,7 +41,8 @@ def detail(request, blog_id):
   return render(request, 'detail.html', {'blog':blog_detail, 'hashtags':blog_hashtag})
 
 def new(request):
-  return render(request, 'new.html')
+  form = BlogForm()
+  return render(request, 'new.html', {'form':form})
 
 def create(request):
   form = BlogForm(request.POST, request.FILES)

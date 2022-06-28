@@ -1,34 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit</title>
-  </head>
-  <body>
-    <style>
-      @font-face {
-        font-family: 'SuncheonB';
-        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/SuncheonB.woff')
-          format('woff');
-        font-weight: normal;
-        font-style: normal;
-      }
-    </style>
-    <h1>Editing Character</h1>
+{% extends 'base.html' %} {% block head %}
+<title>Edit</title>
+{% endblock %} {% block content %}
+<h1>Editing Character</h1>
 
-    <form action="{% url 'update' blog.id %}" method="post">
-      {% csrf_token %}
-      <p>제목:<input type="text" name="title" value="{{blog.title}}" /></p>
-      본문:
-      <textarea name="body" col="50" row="30" id="">{{blog.body}}</textarea>
-      <input
-        type="text"
-        name="hashtags"
-        value="{% for hashtag in hashtags.all %}{{hashtag}},{% endfor %}"
-      />
-      <button type="submit">제출</button>
-    </form>
-  </body>
-</html>
+<form action="{% url 'update' blog.id %}" method="post">
+  {% csrf_token %}
+  <p>제목:<input type="text" name="title" value="{{blog.title}}" /></p>
+  본문:
+  <textarea name="body" col="50" row="30" id="">{{blog.body}}</textarea>
+  해시태그<input
+    type="text"
+    name="hashtags"
+    value="{% for hashtag in hashtags.all %}{{hashtag}}, {% endfor %}"
+  />
+  <button type="submit">제출</button>
+</form>
+{% endblock %}
